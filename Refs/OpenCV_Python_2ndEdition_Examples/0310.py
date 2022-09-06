@@ -7,9 +7,9 @@ x, y, R = 256, 256, 50
 direction = 0 # right
 
 while True:   
-    key = cv2.waitKeyEx(30)    
+    key = cv2.waitKeyEx(10)    
     if key == 0x1B: 
-        break;
+        break
     
 # 방향키 방향전환 
     elif key == 0x270000: # right

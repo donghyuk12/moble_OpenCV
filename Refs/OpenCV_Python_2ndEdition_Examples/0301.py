@@ -12,7 +12,18 @@ cv2.rectangle(img, pt1, pt2, (0, 255, 0), 2)
 
 cv2.line(img, (0, 0), (500, 0), (255, 0, 0), 5)
 cv2.line(img, (0, 0), (0, 500), (0,0,255), 5)
+#cv2.imshow('img', img)
+#cv2.waitKey()
+#cv2.destroyAllWindows()
 
-cv2.imshow('img', img)
+#==================================================
+imageFile = ('./data/Lena.png')
+img1 = cv2.imread(imageFile)
+cv2.rectangle(img1, pt1, pt2, (0, 0, 255), 5)
+cv2.imwrite('./data/squarelena.png',img1,[cv2.IMWRITE_JPEG_QUALITY, 2])
+
+imageFile = ('./data/squarelena.png')
+img2 = cv2.imread(imageFile)
+cv2.imshow('Lena', img2)
 cv2.waitKey()
 cv2.destroyAllWindows()
