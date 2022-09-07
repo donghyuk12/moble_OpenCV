@@ -15,7 +15,7 @@ cv2.imshow('Lena grayscale',img2)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
-
+cv2.imread(imageFile, cv2.IMREAD_GRAYSCALE)
 # im = Image.open('./data/lena.jpg')
 # size = (256, 256)
 # im.thumbnail(size)
