@@ -15,14 +15,14 @@ while True:
     if not retval:
         break   
     
-    imageFile = './data/lena.jpg'
+    imageFile = './data/llena.jpg'
     img2 = cv2.imread(imageFile)
     resize_img2 = cv2.resize(img2, (100, 100))
     img2 = resize_img2
     rows, cols, channels = img2.shape
     roi = frame[50:rows+50,50:cols+50]
     gray = cv2.cvtColor(img2, cv2.COLOR_BGR2GRAY)
-    ret, mask = cv2.threshold(gray, 1, 255, cv2.THRESH_TRUNC)
+    ret, mask = cv2.threshold(gray, 160, 255, cv2.THRESH_TRUNC)
     mask_inv = cv2.bitwise_not(mask)
     frame_bg = cv2.bitwise_and(roi, roi, mask=mask)
     img2_fg = cv2.bitwise_and(img2, img2, mask=mask)
@@ -38,6 +38,5 @@ while True:
         break
 cap.release()
 out1.release()
-out2.release()
 cv2.waitKeyEx()
 cv2.destroyAllWindows()

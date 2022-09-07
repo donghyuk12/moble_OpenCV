@@ -3,6 +3,7 @@ import cv2
 src = cv2.imread('./data/lena.jpg')
 
 dst = cv2.split(src) 
+
 print(type(dst))
 print(type(dst[0])) # type(dst[1]), type(dst[2])
 
