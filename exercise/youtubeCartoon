@@ -1,0 +1,36 @@
+import pafy
+import cv2
+
+url = 'https://www.youtube.com/watch?v=433HGrqXk_k'
+
+video = pafy.new(url)
+print("title = ", video.title)
+best = video.getbest(preftype = 'any')
+
+
+capture = cv2.VideoCapture(best.url)
+while True:
+    ret,image =capture.read()
+    if not ret:
+        break
+    
+    img_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
+    img_blur = cv2.medianBlur(img_gray, 5)
+       
+    img_edge = cv2.adaptiveThreshold(img_blur,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,cv2.THRESH_BINARY,blockSize=9,C=3)
+    
+    img_edge = cv2.cvtColor(img_edge, cv2.COLOR_GRAY2BGR)
+    
+    img_copy = cv2.bilateralFilter(image, d=9, sigmaColor=9, sigmaSpace=7)
+    img_copy = cv2.resize(img_copy, (image.shape[1], image.shape[0]),interpolation=cv2.INTER_CUBIC)
+    img_cartoon = cv2.bitwise_and(img_copy, img_edge)
+
+    cv2.imshow('webCAM', img_cartoon)   
+    
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+capture.release()
+cv2.destroyAllWindows()
+        
+

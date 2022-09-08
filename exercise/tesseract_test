@@ -1,0 +1,17 @@
+from email.mime import image
+from PIL import Image
+import pytesseract
+import cv2 as cv
+
+str = pytesseract.image_to_string(Image.open('.\\data\\1231.png'), lang='kor')
+imageFile = './data/1231.png'
+img1 = cv.imread(imageFile)
+img = cv.cvtColor(img1, cv.COLOR_BGR2GRAY)
+_, img = cv.threshold(img, 160, 255, cv.THRESH_BINARY)
+cv.imshow('123', img)
+img = cv.Canny(img, 50, 200, None, 3)
+cv.imshow('Image - binary & edge', img)
+str = pytesseract.image_to_string(img, lang='kor')
+cv.waitKey()
+cv.destroyAllWindows()
+print(str)
